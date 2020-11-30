@@ -1,0 +1,170 @@
+﻿<#@ template debug="true" hostspecific="true" language="C#" #>
+<#@ assembly name="EnvDTE" #>
+<#@ import namespace="EnvDTE" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ assembly name="System.Linq.dll" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ assembly name="Newtonsoft.Json" #>
+<#@ import namespace="Newtonsoft.Json" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ assembly name= "$(ProjectDir)\bin\Debug\Web.Automation.dll" #>
+<#@ import namespace= "Web.Automation.Web.Component" #>
+<#@ output extension=".cs" #>
+
+
+<# var JsonFilesDirectory = System.IO.Path.GetDirectoryName(this.Host.TemplateFile); #>
+<# var directoryLst = GetSubDirectories(JsonFilesDirectory); #>
+<# foreach(var dr in directoryLst)
+{#>
+<# var fileLst = GetFilesList(dr);
+foreach(var fl in fileLst)
+{#>
+<#
+if(fl.Contains(".json") || fl.Contains(".Json") || fl.Contains(".JSON"))
+{
+#>
+<# string fileName = fl; #>
+<# List<JsonElement> parsedJsonFile = new List<JsonElement>(); #>
+<# parsedJsonFile = JsonConvert.DeserializeObject<List<JsonElement>>(File.ReadAllText(Path.Combine(dr,fileName))); #>
+<# string className = System.IO.Path.GetFileNameWithoutExtension(fileName) ; #>
+<#
+string folderName = "";
+string folderPath = "";
+string toBeSearched = "ObjectRepository\\";
+int ix = dr.IndexOf(toBeSearched);
+
+if (ix != -1) 
+{
+ folderName = dr.Substring(ix + toBeSearched.Length);
+ if(string.IsNullOrEmpty(folderName))
+ folderPath = "Pages";
+ else
+ folderPath = "Pages."+folderName;
+}
+else
+{
+folderPath = "Pages";
+
+}
+
+
+#>
+/// <summary>
+/// This is Auto Generated Class By Template file AutoGeneratePagesElementsClasses.tt
+/// Please Don't Edit this Class if you need to add new Elements, add them in related JSON File then from Build Menu -> click Transform All T4 Templates
+/// </summary>
+using OpenQA.Selenium;
+using Web.Automation.Web.Component;
+
+<# string fullNameSpace = (string)System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("NamespaceHint");
+   string projNameSpace = fullNameSpace.ToString().Replace(".Domain.ObjectRepository","");
+   string fullProjNameSpace = projNameSpace + "." + folderPath.Replace('\\','.');
+#>
+
+namespace <#= fullProjNameSpace #>
+{
+public class <#= className + "Elements" #> {
+<# // This code runs in the text template:
+  { #>
+      private readonly IWebDriver _driver;
+	 
+	 	  
+<# if(string.IsNullOrEmpty(folderName))
+{#>
+      private readonly string _jsonFilePath = AppConfigs.ObjectRepository + @"<#= fileName #>";
+<#}
+else
+{#>
+      private readonly string _jsonFilePath = AppConfigs.ObjectRepository + @"<#= folderName + "\\" + fileName #>";
+<#}#>
+  <#  foreach (var ele in parsedJsonFile)
+  {#>
+    protected readonly AutomatedElement _<#= ele.KeyName #>;
+ <#}#>
+ 
+<# } #>
+ public <#= className+"Elements"  #> (IWebDriver driver)
+        {
+            _driver = driver;
+              ElementParser.Initialize_Page_Elements(this, _driver, _jsonFilePath);
+        }
+}
+
+}
+<# SaveOutputToSubFolder(folderName, className + "Elements.cs");#>
+<#}}#>
+<#}#>
+
+<#+
+private void SaveOutputToSubFolder(string folderName, string outputFileName) {
+  var AutomationDirectory = System.IO.Path.GetDirectoryName(this.Host.TemplateFile);
+
+  string templateDirectory = Path.GetDirectoryName(AutomationDirectory.Replace("Domain\\ObjectRepository","Pages\\"));
+  string newDirectoryName = Path.Combine(templateDirectory,folderName);
+  if(!Directory.Exists(newDirectoryName))
+    Directory.CreateDirectory(newDirectoryName);
+  string outputFilePath = Path.Combine(newDirectoryName, outputFileName);
+File.WriteAllText(outputFilePath, this.GenerationEnvironment.ToString()); 
+  this.GenerationEnvironment.Remove(0, this.GenerationEnvironment.Length);
+}
+private List<string> GetSubDirectories(string path)
+        {
+            List<string> allSubDir = new List<string>();
+            // Get all subdirectories
+			allSubDir.Add(path);
+            string[] subdirectoryEntries = Directory.GetDirectories(path);
+
+            // Loop through them to see if they have any other subdirectories
+
+            foreach (string subdirectory in subdirectoryEntries)
+            {
+                allSubDir.Add(subdirectory);
+                allSubDir.AddRange(LoadSubDirs(subdirectory));
+            }
+            return allSubDir;
+        }
+
+private List<string> LoadSubDirs(string dir)
+        {
+            List<string> allSubDir = new List<string>();
+
+            string[] subdirectoryEntries = Directory.GetDirectories(dir);
+
+            foreach (string subdirectory in subdirectoryEntries)
+            {
+                allSubDir.Add(subdirectory);
+                allSubDir.AddRange(LoadSubDirs(subdirectory));
+            }
+            return allSubDir;
+        }
+private List<string> GetFilesList(string path)
+        {
+            try
+            {
+                int count = 1;
+                var fileLst = new List<string>();
+                var di = new DirectoryInfo(path);
+                while (count < 5)
+                {
+                    FileInfo[] files = di.GetFiles();
+                    foreach(var f in files)
+                    {
+                        fileLst.Add(f.Name);
+                    }
+                    if (fileLst.Count > 0)
+                    {
+                        return fileLst;
+                    }
+                    count++;
+                }
+                return fileLst;
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception("File hasn't been downloaded " + e.Message);
+            }
+        }
+#>

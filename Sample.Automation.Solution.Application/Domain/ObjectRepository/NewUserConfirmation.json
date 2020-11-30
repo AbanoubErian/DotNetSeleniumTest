@@ -1,0 +1,8 @@
+﻿[
+  {
+    "KeyName": "ConfirmationMessage",
+    "LocatorType": "XPath",
+    "LocatorValue": "//*[@id='customer']/tbody/tr[1]/td",
+    "IsLazyLoaded": "true"
+  }
+]

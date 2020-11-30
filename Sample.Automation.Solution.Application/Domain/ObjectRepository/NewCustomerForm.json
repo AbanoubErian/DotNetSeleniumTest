@@ -1,0 +1,76 @@
+﻿[
+  {
+    "KeyName": "userName",
+    "LocatorType": "XPath",
+    "LocatorValue": "//input[contains(@name,'name')]",
+    "IsLazyLoaded": "true"
+  },
+  {
+    "KeyName": "maleGender",
+    "LocatorType": "XPath",
+    "LocatorValue": "//input[contains(@name,'rad1')][1]",
+    "IsLazyLoaded": "true"
+  },
+  {
+    "KeyName": "femaleGender",
+    "LocatorType": "XPath",
+    "LocatorValue": "//input[contains(@name,'rad1')][2]",
+    "IsLazyLoaded": "true"
+  },
+  {
+    "KeyName": "dateOfBirth",
+    "LocatorType": "XPath",
+    "LocatorValue": "//input[@id='dob']",
+    "IsLazyLoaded": "true"
+  },
+  {
+    "KeyName": "Address",
+    "LocatorType": "XPath",
+    "LocatorValue": "//textarea[contains(@name,'addr')]",
+    "IsLazyLoaded": "true"
+  },
+  {
+    "KeyName": "City",
+    "LocatorType": "XPath",
+    "LocatorValue": "//input[contains(@name,'city')]",
+    "IsLazyLoaded": "true"
+  },
+  {
+    "KeyName": "State",
+    "LocatorType": "XPath",
+    "LocatorValue": "//input[contains(@name,'state')]",
+    "IsLazyLoaded": "true"
+  },
+  {
+    "KeyName": "pin",
+    "LocatorType": "XPath",
+    "LocatorValue": "//input[contains(@name,'pinno')]",
+    "IsLazyLoaded": "true"
+  },
+  {
+    "KeyName": "MobileNb",
+    "LocatorType": "XPath",
+    "LocatorValue": "//input[contains(@name,'telephoneno')]",
+    "IsLazyLoaded": "true"
+  },
+  {
+    "KeyName": "Email",
+    "LocatorType": "XPath",
+    "LocatorValue": "//input[contains(@name,'emailid')]",
+    "IsLazyLoaded": "true"
+  },
+  {
+    "KeyName": "Password",
+    "LocatorType": "XPath",
+    "LocatorValue": "//input[contains(@name,'password')]",
+    "IsLazyLoaded": "true"
+  },
+  {
+    "KeyName": "submit",
+    "LocatorType": "XPath",
+    "LocatorValue": "//input[contains(@name,'sub')]",
+    "IsLazyLoaded": "true"
+  }
+
+
+]

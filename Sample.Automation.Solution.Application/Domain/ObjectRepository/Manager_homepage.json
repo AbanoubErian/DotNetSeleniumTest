@@ -1,0 +1,8 @@
+﻿[
+  {
+    "KeyName": "loggedUsername",
+    "LocatorType": "XPath",
+    "LocatorValue": "//tr[@class='heading3']/td",
+    "IsLazyLoaded": "true"
+  }
+]

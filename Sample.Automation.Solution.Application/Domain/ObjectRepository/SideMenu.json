@@ -1,0 +1,8 @@
+﻿[
+  {
+    "KeyName": "NewCustomer",
+    "LocatorType": "LinkText",
+    "LocatorValue": "New Customer",
+    "IsLazyLoaded": "true"
+  }
+]
