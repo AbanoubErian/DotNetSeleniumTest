@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using Sample.Automation.Solution.Application.TestData;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,26 +10,21 @@ using Web.Automation.Web.Component;
 
 namespace Sample.Automation.Solution.Application.Pages
 {
-    public class LoginPage
+    public class LoginPage : LoginElements
     {
-        private readonly string _jsonPagePath = AppConfigs.ObjectRepository + @"Login.json";
-        private AutomatedElement userNameField, passwordField, loginBTN;
+
         readonly IWebDriver _driver;
-        public LoginPage(IWebDriver driver)
+
+        public LoginPage(IWebDriver driver) : base (driver)
         {
             _driver = driver;
-            var _pageElement = ElementParser.Initialize_Page_Elements(_driver, _jsonPagePath);
-            userNameField = _pageElement["username"];
-            passwordField = _pageElement["password"];
-            loginBTN = _pageElement["login"];
         }
 
-
-        public void Login(string username, string password)
+        public void Login(Manager manger)
         {
-            AutomatedActions.TextActions.EnterTextInField(_driver, userNameField, username);
-            AutomatedActions.TextActions.EnterTextInField(_driver, passwordField, password);
-            AutomatedActions.ClickActions.ClickOnElement(_driver, loginBTN);
+            AutomatedActions.TextActions.EnterTextInField(_driver, _username, manger.userName);
+            AutomatedActions.TextActions.EnterTextInField(_driver, _password, manger.password);
+            AutomatedActions.ClickActions.ClickOnElement(_driver, _login);
         }
 
         public bool AssertManagerLogin(AutomatedBrowser Browser)

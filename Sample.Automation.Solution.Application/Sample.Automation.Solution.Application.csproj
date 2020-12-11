@@ -95,14 +95,22 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AutoGeneratePagesElementsClasses.tt</DependentUpon>
     </Compile>
-    <Compile Include="Domain\TestData\User.cs" />
+    <Compile Include="Domain\TestData\Customer.cs" />
+    <Compile Include="Domain\TestData\CustomersList.cs" />
+    <Compile Include="Domain\TestData\Manager.cs" />
     <Compile Include="AppConfigs.cs" />
     <Compile Include="Pages\AddNewCustomer.cs" />
+    <Compile Include="Pages\LoginElements.cs" />
     <Compile Include="Pages\LoginPage.cs" />
     <Compile Include="Pages\ManagerHomepage.cs" />
+    <Compile Include="Pages\Manager_homepageElements.cs" />
     <Compile Include="Pages\NewCustomerConfirmationPage.cs" />
+    <Compile Include="Pages\NewCustomerFormElements.cs" />
+    <Compile Include="Pages\NewUserConfirmationElements.cs" />
+    <Compile Include="Pages\SideMenuElements.cs" />
     <Compile Include="Pages\SideMenuPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\UtilitiesHelpers.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

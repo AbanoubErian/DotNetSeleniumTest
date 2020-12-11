@@ -9,24 +9,20 @@ using Web.Automation.Web.Component;
 
 namespace Sample.Automation.Solution.Application.Pages
 {
-    public class NewCustomerConfirmationPage
+    public class NewCustomerConfirmationPage : NewUserConfirmationElements
     {
-        private readonly string _jsonPagePath = AppConfigs.ObjectRepository + @"NewUserConfirmation.json";
-        private readonly AutomatedElement registrationConfirmationMessage;
         readonly IWebDriver _driver;
 
-        public NewCustomerConfirmationPage(IWebDriver driver)
+        public NewCustomerConfirmationPage(IWebDriver driver) : base(driver)
         {
             _driver = driver;
-            var pageElement = ElementParser.Initialize_Page_Elements(_driver, _jsonPagePath);
-            registrationConfirmationMessage = pageElement["ConfirmationMessage"];
         }
 
         public string getConfirmationMessage()
         {
             try
             {
-                return AutomatedActions.TextActions.GetTextOfElement(_driver, registrationConfirmationMessage);
+                return AutomatedActions.TextActions.GetTextOfElement(_driver, _ConfirmationMessage);
             }
             catch (Exception e)
             {

@@ -9,21 +9,18 @@ using Web.Automation.Web.Component;
 
 namespace Sample.Automation.Solution.Application.Pages
 {
-    public class ManagerHomepage
+    public class ManagerHomepage : Manager_homepageElements
     {
-        private readonly string _jsonPagePath = AppConfigs.ObjectRepository + @"Manager_homepage.json";
-        private readonly AutomatedElement loggedUsernamelabel;
         readonly IWebDriver _driver;
-        public ManagerHomepage(IWebDriver driver)
+
+        public ManagerHomepage(IWebDriver driver) : base(driver)
         {
             _driver = driver;
-            var pageElement = ElementParser.Initialize_Page_Elements(_driver, _jsonPagePath);
-            loggedUsernamelabel = pageElement["loggedUsername"];
         }
 
         public string getLoggedinUsername()
         {
-            return AutomatedActions.TextActions.GetTextOfElement(_driver, loggedUsernamelabel);
+            return AutomatedActions.TextActions.GetTextOfElement(_driver, _loggedUsername);
         }
     }
 }

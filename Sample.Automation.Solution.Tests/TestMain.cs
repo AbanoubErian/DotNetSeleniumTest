@@ -5,6 +5,7 @@ using Reporting.Utilities.Reporting;
 using Sample.Automation.Solution.Application;
 using Web.Automation.Web.Action;
 using Web.Automation.Web.Component;
+using Sample.Automation.Solution.Application.Utilities;
 
 namespace Sample.Automation.Solution.Tests
 {
@@ -112,10 +113,11 @@ namespace Sample.Automation.Solution.Tests
         {
             //Finalize and generate the report
             AutomationReport.GenerateTestReport();
+            UtilitiesHelpers.SendmailMethod(TestConfigs.ReportingDirectory, TestConfigs.Email);
             // AutomationReport.Flush();
         }
 
-      
+
     }//end class
 
 }//namespace

@@ -1,8 +1,8 @@
 ﻿[
   {
     "KeyName": "userName",
-    "LocatorType": "XPath",
-    "LocatorValue": "//input[contains(@name,'name')]",
+    "LocatorType": "Name",
+    "LocatorValue": "name",
     "IsLazyLoaded": "true"
   },
   {
@@ -19,56 +19,56 @@
   },
   {
     "KeyName": "dateOfBirth",
-    "LocatorType": "XPath",
-    "LocatorValue": "//input[@id='dob']",
+    "LocatorType": "Id",
+    "LocatorValue": "dob",
     "IsLazyLoaded": "true"
   },
   {
     "KeyName": "Address",
-    "LocatorType": "XPath",
-    "LocatorValue": "//textarea[contains(@name,'addr')]",
+    "LocatorType": "Name",
+    "LocatorValue": "addr",
     "IsLazyLoaded": "true"
   },
   {
     "KeyName": "City",
-    "LocatorType": "XPath",
-    "LocatorValue": "//input[contains(@name,'city')]",
+    "LocatorType": "Name",
+    "LocatorValue": "city",
     "IsLazyLoaded": "true"
   },
   {
     "KeyName": "State",
-    "LocatorType": "XPath",
-    "LocatorValue": "//input[contains(@name,'state')]",
+    "LocatorType": "Name",
+    "LocatorValue": "state",
     "IsLazyLoaded": "true"
   },
   {
     "KeyName": "pin",
-    "LocatorType": "XPath",
-    "LocatorValue": "//input[contains(@name,'pinno')]",
+    "LocatorType": "Name",
+    "LocatorValue": "pinno",
     "IsLazyLoaded": "true"
   },
   {
     "KeyName": "MobileNb",
-    "LocatorType": "XPath",
-    "LocatorValue": "//input[contains(@name,'telephoneno')]",
+    "LocatorType": "Name",
+    "LocatorValue": "telephoneno",
     "IsLazyLoaded": "true"
   },
   {
     "KeyName": "Email",
-    "LocatorType": "XPath",
-    "LocatorValue": "//input[contains(@name,'emailid')]",
+    "LocatorType": "Name",
+    "LocatorValue": "emailid",
     "IsLazyLoaded": "true"
   },
   {
     "KeyName": "Password",
-    "LocatorType": "XPath",
-    "LocatorValue": "//input[contains(@name,'password')]",
+    "LocatorType": "Name",
+    "LocatorValue": "password",
     "IsLazyLoaded": "true"
   },
   {
     "KeyName": "submit",
-    "LocatorType": "XPath",
-    "LocatorValue": "//input[contains(@name,'sub')]",
+    "LocatorType": "Name",
+    "LocatorValue": "sub",
     "IsLazyLoaded": "true"
   }
 

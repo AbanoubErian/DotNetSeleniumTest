@@ -7,10 +7,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Sample.Automation.Solution.Application.Pages;
-using Sample.Automation.Solution.Tests.Utility_Functions;
 using System.IO;
 using AventStack.ExtentReports;
 using System.Reflection;
+using Sample.Automation.Solution.Application.TestData;
 
 namespace Sample.Automation.Solution.Tests.Scripts.UserTCs
 {
@@ -37,26 +37,21 @@ namespace Sample.Automation.Solution.Tests.Scripts.UserTCs
             AutomatedLogger.Log("Test suite setup is done");
         }
 
-
-
-        [TestCase("CreateNewUser1", "Customer Data", TestName = "Success Test Case")]
-        [TestCase("CreateNewUser2", "Customer Data", TestName = "Failure Test Case")]
-        public void CreateNewUser(String testCaseName,String sheetName)
+        [TestCase("Create_New_User1", "Customer Data", TestName = "Success Test Case")]
+        [TestCase("Create_New_User2", "Customer Data", TestName = "Failure Test Case")]
+        public void Create_New_User(String testCaseName,String sheetName)
         {
             AutomatedLogger.Log("Manager is logging");
 
             String reportingPathDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\Artifacts\\Reports\\";
 
-            manager = new Manager("Manager Data", "ManagerLogin");
-            loginPage.Login(manager.userName, manager.password);
+            manager = new Manager("Manager Data", "Manager_Login");
+            loginPage.Login(manager);
             bool mgrLoginFlag = loginPage.AssertManagerLogin(ActiveBrowser);
 
             //Asserting Manager login
             if (mgrLoginFlag)
-            {
                 AutomationReport.AssertAndReportStatus(mgrLoginFlag,"Loggin Status", "Manager logged in successfully", "Manager Failed to login");
-                AutomatedLogger.Log("Manager logged in successfully");
-            }
 
             else
             {
@@ -70,32 +65,24 @@ namespace Sample.Automation.Solution.Tests.Scripts.UserTCs
             //Clicking on Create new user from the side menu
             sideMenu.clickNewCustomer();
 
-            Random random = new Random();
-            int Rand = random.Next(0, 10000);
-
             AutomatedLogger.Log("Inserting form fields data");
             customer = new Customer(sheetName, testCaseName);
-            newCustomerPage.fillFormWithValidData(customer.userName, customer.gender, customer.dateOfBirth, customer.address, customer.city, customer.state
-                , customer.pin, customer.mobile, Rand + customer.email, customer.password);
+            newCustomerPage.fillFormWithValidData(customer);
 
             //Customer Submission Assertion
             bool isCustomerAdded = newCustomerPage.AssertCustomerAddition(ActiveBrowser);
-
             if (isCustomerAdded)
             {
                 string csAssertionMessage = newCustomerConfirmationPage.getConfirmationMessage();
                 AutomationReport.AssertAndReportStatus(csAssertionMessage.Contains("Customer Registered Successfully!!!"), "Logging customed addition status"
                     , "Customer added successfully", "Customer addition failed");
-
-                AutomatedLogger.Log("Customer Added Successfully");
-
             }
+
             else
             {
                 AutomationReport.Log("Customer is not Added Correctly", Status.Fail);
                 AutomationReport.TakeScreenshot(ActiveBrowser.WebDriverInstance, reportingPathDir, testCaseName, "Failure Screenshot");
                 AutomatedLogger.Log("Customer Addition failed");
-
             }
 
             AutomatedLogger.Log("Test case execution is finished");

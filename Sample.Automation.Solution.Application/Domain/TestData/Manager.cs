@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sample.Automation.Solution.Tests.Utility_Functions
+namespace Sample.Automation.Solution.Application.TestData
 {
-    class Manager
+    public class Manager
     {
         private string _username;
         private string _Password;

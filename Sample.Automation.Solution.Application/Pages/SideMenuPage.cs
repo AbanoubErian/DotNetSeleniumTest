@@ -9,23 +9,18 @@ using Web.Automation.Web.Component;
 
 namespace Sample.Automation.Solution.Application.Pages
 {
-    public class SideMenuPage
+    public class SideMenuPage : SideMenuElements
     {
-        //private readonly string _jsonPagePath = "D:\\Training & Tutorials\\Automation Testing\\.Net Automation Matrials\\Sample.Automation.Solution\\Sample.Automation.Solution\\Sample.Automation.Solution.Application\\Domain\\ObjectRepository\\SideMenu.json";
-        private readonly string _jsonPagePath = AppConfigs.ObjectRepository + @"SideMenu.json";
-        private readonly AutomatedElement newCustomermenuItem;
         readonly IWebDriver _driver;
 
-        public SideMenuPage(IWebDriver driver)
+        public SideMenuPage(IWebDriver driver) : base (driver)
         {
             _driver = driver;
-            var pageElement = ElementParser.Initialize_Page_Elements(_driver, _jsonPagePath);
-            newCustomermenuItem = pageElement["NewCustomer"];
         }
 
         public void clickNewCustomer()
         {
-            AutomatedActions.ClickActions.ClickOnElement(_driver, newCustomermenuItem);
+            AutomatedActions.ClickActions.ClickOnElement(_driver, _NewCustomer);
         }
     }
 }

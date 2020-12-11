@@ -1,20 +1,20 @@
 ﻿[
   {
     "KeyName": "username",
-    "LocatorType": "XPath",
-    "LocatorValue": "//input[contains(@name,'uid')]",
+    "LocatorType": "Name",
+    "LocatorValue": "uid",
     "IsLazyLoaded": "false"
   },
   {
     "KeyName": "password",
-    "LocatorType": "XPath",
-    "LocatorValue": "//input[contains(@name,'password')]",
+    "LocatorType": "Name",
+    "LocatorValue": "password",
     "IsLazyLoaded": "false"
   },
   {
     "KeyName": "login",
-    "LocatorType": "XPath",
-    "LocatorValue": "//input[contains(@name,'btnLogin')]",
+    "LocatorType": "Name",
+    "LocatorValue": "btnLogin",
     "IsLazyLoaded": "false"
   }
 ]

@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using Sample.Automation.Solution.Application.TestData;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,58 +10,41 @@ using Web.Automation.Web.Component;
 
 namespace Sample.Automation.Solution.Application.Pages
 {
-    public class AddNewCustomer
+    public class AddNewCustomer : NewCustomerFormElements
     {
-        private string _jsonPagePath = AppConfigs.ObjectRepository + @"NewCustomerForm.json";
-        private readonly Web.Automation.Web.Component.AutomatedElement username, maleGender, femaleGender, dateOfBirth, address, city, state, pin, mobNb, email, password, submitBTN;
         readonly IWebDriver _driver;
-        public AddNewCustomer(IWebDriver driver)
+        public AddNewCustomer(IWebDriver driver) : base(driver)
         {
             _driver = driver;
-            var pageElement = ElementParser.Initialize_Page_Elements(_driver, _jsonPagePath);
-            username = pageElement["userName"];
-            maleGender = pageElement["maleGender"];
-            femaleGender = pageElement["femaleGender"];
-            dateOfBirth = pageElement["dateOfBirth"];
-            address = pageElement["Address"];
-            city = pageElement["City"];
-            state = pageElement["State"];
-            pin = pageElement["pin"];
-            mobNb = pageElement["MobileNb"];
-            email = pageElement["Email"];
-            password = pageElement["Password"];
-            submitBTN = pageElement["submit"];
         }
 
-        public void fillFormWithValidData(string nameValue, char genderValue, string dateOfBirthValue, string addressValue, string cityValue, string stateValue,
-            string pinValue, string mobNbValue, string emailValue, string passwordValue)
+        public void fillFormWithValidData(Customer customer)
         {
-            Web.Automation.Web.Action.AutomatedActions.TextActions.EnterTextInField(_driver, username, nameValue);
+            Random random = new Random();
+            int Rand = random.Next(0, 10000);
 
-            switch (genderValue)
+            AutomatedActions.TextActions.EnterTextInField(_driver, _userName, customer.userName);
+            switch (customer.gender)
             {
                 case 'm':
-                    AutomatedActions.ClickActions.ClickOnElement(_driver, maleGender);
+                    AutomatedActions.ClickActions.ClickOnElement(_driver, _maleGender);
                     break;
                 case 'f':
-                    AutomatedActions.ClickActions.ClickOnElement(_driver, femaleGender);
+                    AutomatedActions.ClickActions.ClickOnElement(_driver, _femaleGender);
                     break;
                 default:
                     break;
             }
 
-            //Split the DateText
-            String[] dateItems = dateOfBirthValue.Split('/');
-
-            AutomatedActions.TextActions.EnterTextInField(_driver, dateOfBirth, dateOfBirthValue,false);
-            AutomatedActions.TextActions.EnterTextInField(_driver, address, addressValue);
-            AutomatedActions.TextActions.EnterTextInField(_driver, city, cityValue);
-            AutomatedActions.TextActions.EnterTextInField(_driver, state, stateValue);
-            AutomatedActions.TextActions.EnterTextInField(_driver, pin, pinValue);
-            AutomatedActions.TextActions.EnterTextInField(_driver, mobNb, mobNbValue);
-            AutomatedActions.TextActions.EnterTextInField(_driver, email, emailValue);
-            AutomatedActions.TextActions.EnterTextInField(_driver, password, passwordValue);
-            AutomatedActions.ClickActions.ClickOnElement(_driver, submitBTN);
+            AutomatedActions.TextActions.EnterTextInField(_driver, _dateOfBirth, customer.dateOfBirth,false);
+            AutomatedActions.TextActions.EnterTextInField(_driver, _Address, customer.address);
+            AutomatedActions.TextActions.EnterTextInField(_driver, _City, customer.city);
+            AutomatedActions.TextActions.EnterTextInField(_driver, _State, customer.state);
+            AutomatedActions.TextActions.EnterTextInField(_driver, _pin, customer.pin);
+            AutomatedActions.TextActions.EnterTextInField(_driver, _MobileNb, customer.mobile);
+            AutomatedActions.TextActions.EnterTextInField(_driver, _Email, Rand + customer.email);
+            AutomatedActions.TextActions.EnterTextInField(_driver, _Password, customer.password);
+            AutomatedActions.ClickActions.ClickOnElement(_driver, _submit);
         }
 
         public bool AssertCustomerAddition(AutomatedBrowser Browser)

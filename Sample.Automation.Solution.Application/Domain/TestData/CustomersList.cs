@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sample.Automation.Solution.Tests.Utility_Functions
+namespace Sample.Automation.Solution.Application.TestData
 {
-    class CustomersList
+    public class CustomersList
     {
         private List<string> _username_list;
         private List<string> _Gender_list;

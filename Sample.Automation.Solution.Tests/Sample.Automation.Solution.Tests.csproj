@@ -105,9 +105,6 @@
     <Compile Include="TestConfigs.cs" />
     <Compile Include="TestMain.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Utility Functions\Customer.cs" />
-    <Compile Include="Utility Functions\CustomersList.cs" />
-    <Compile Include="Utility Functions\Manager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sample.Automation.Solution.Tests.Utility_Functions
+namespace Sample.Automation.Solution.Application.TestData
 {
     public class Customer
     {
